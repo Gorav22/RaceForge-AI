@@ -1,68 +1,87 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* F1 Racing Theme - Dark Mode */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 20% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 20% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Racing Red Primary */
+    --primary: 0 100% 43%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Dark Red Secondary */
+    --secondary: 0 30% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 10% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    /* Neon Yellow Accent */
+    --accent: 54 100% 50%;
+    --accent-foreground: 0 0% 10%;
+
+    /* Electric Blue */
+    --electric: 187 100% 50%;
+    --electric-foreground: 0 0% 10%;
+
+    /* Chrome Silver */
+    --chrome: 0 0% 75%;
+    --chrome-foreground: 0 0% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 20% 15%;
+    --input: 0 20% 15%;
+    --ring: 0 100% 43%;
+
+    --radius: 0.75rem;
+
+    /* Racing Gradients */
+    --gradient-racing: linear-gradient(135deg, hsl(0 0% 4%) 0%, hsl(0 40% 8%) 100%);
+    --gradient-red: linear-gradient(135deg, hsl(0 100% 43%) 0%, hsl(0 80% 35%) 100%);
+    --gradient-glow: radial-gradient(circle at center, hsl(0 100% 43% / 0.3) 0%, transparent 70%);
+    
+    /* Glass Effect */
+    --glass-bg: hsl(0 0% 100% / 0.05);
+    --glass-border: hsl(0 0% 100% / 0.1);
+    --glass-shadow: 0 8px 32px 0 hsl(0 0% 0% / 0.37);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
-  a:hover {
-    color: #747bff;
+}
+
+@layer base {
+  * {
+    @apply border-border;
   }
-  button {
-    background-color: #f9f9f9;
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 }
