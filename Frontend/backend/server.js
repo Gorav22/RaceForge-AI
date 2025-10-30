@@ -6,9 +6,11 @@ import authRoutes from './routes/auth.js';
 import paymentRoutes from './routes/payment.js';
 import raceRoutes from './routes/race.js';
 import Stripe from "stripe";
+import webhookRoutes from './routes/webhook.js';
 
 // Load environment variables
 dotenv.config();
+const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Connect to database
@@ -16,7 +18,6 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/f1_tem
 connectDB(MONGODB_URI);
 
 // Initialize Express app
-const app = express();
 
 // Middleware
 app.use(cors({
@@ -24,6 +25,7 @@ app.use(cors({
   credentials: true
 }));
 
+// app.use('/api/payment', webhookRoutes);
 // Body parser (JSON) - for all routes except webhook
 app.use(express.json());
 
