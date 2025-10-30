@@ -13,6 +13,8 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
 import NotFound from "./pages/NotFound";
 import ManyModels from "./pages/manymodels";
+import ObjViewer from "./pages/fedf";
+
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,8 @@ const App = () => (
             <Route path="/cancel" element={<PaymentCancel />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/many-models" element={<ManyModels />} />
+                      <Route path="/fedf" element={<ObjViewer />} />
+
           </Routes>
         </AuthProvider>
       </BrowserRouter>
