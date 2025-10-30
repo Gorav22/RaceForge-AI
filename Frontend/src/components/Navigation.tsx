@@ -65,11 +65,11 @@ export const Navigation = () => {
               {navItems.map((item) => (
                 <a
                   key={item}
-                  href={item === "Features" ? "/features" : `#${item.toLowerCase()}`}
+                  href={item === "Features" ? "/features" : item === "Showcase" ? "/many-models" : `#${item.toLowerCase()}`}
                   onClick={(e) => {
-                    if (item === "Features") {
+                    if (item === "Features" || item === "Showcase") {
                       e.preventDefault();
-                      navigate("/features");
+                      navigate(item === "Features" ? "/features" : "/many-models");
                     }
                   }}
                   className="text-muted-foreground hover:text-primary transition-colors font-medium"
@@ -166,6 +166,8 @@ export const Navigation = () => {
                     onClick={() => {
                       if (item === "Features") {
                         navigate("/features");
+                      } else if (item === "Showcase") {
+                        navigate("/many-models");
                       } else {
                         // navigate to hash on the index page
                         window.location.hash = item.toLowerCase();

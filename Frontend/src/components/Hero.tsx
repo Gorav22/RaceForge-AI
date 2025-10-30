@@ -52,9 +52,9 @@ export const Hero = () => {
               <span className="text-foreground">Race Forge </span>
               <span className="text-primary">AI</span>
               <br />
-              <span className="text-primary italic">GAME DESIGN</span>
+              <span className="text-primary italic">Custom Car &</span>
               <br />
-              <span className="bg-gradient-red bg-clip-text text-transparent">SYSTEM</span>
+              <span className="bg-gradient-red bg-clip-text text-transparent">Racing</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl">
