@@ -36,7 +36,7 @@ export function Intro({ children }: IntroProps): React.ReactElement {
         ${loading ? 'opacity-100' : 'opacity-95'} 
         ${clicked ? 'animate-fade-out' : 'animate-fade-in'}
         transition-opacity duration-500 z-50`}>
-        <div className="relative flex flex-col items-center space-y-8">
+        <div className="relative stack flex flex-col items-center space-y-8">
           <div className="intro-keys backdrop-blur-lg bg-black/30 p-8 rounded-2xl border border-white/10 shadow-2xl">
             <Keys style={{ paddingBottom: 20 }} />
             <button
