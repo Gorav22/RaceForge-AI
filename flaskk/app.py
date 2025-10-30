@@ -6,7 +6,7 @@ os.makedirs("outputs", exist_ok=True)
 print("=== 3D Model Generator ===")
 mode = input("Choose input type (text/image): ").strip().lower()
 if mode == "text":
-    prompt = input("Enter your text prompt (e.g., 'a red apple'): ")
+    prompt = input("Enter your text prompt (e.g., 'a red F1 racing car'): ")
     generate_3d_from_text(prompt)
 elif mode == "image":
     image_path = input("Enter path to input image (e.g., corgi.png): ").strip()

@@ -37,7 +37,7 @@ export const Navigation = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const navItems = ["Features", "Showcase", "Preview", "Pricing"];
+  const navItems = ["Home", "Features", "Showcase", "Preview", "Pricing"];
 
   return (
     <>
@@ -65,7 +65,7 @@ export const Navigation = () => {
               {navItems.map((item) => (
                 <a
                   key={item}
-                  href={item === "Features" ? "/features" : item === "Showcase" ? "/many-models" : item === "Preview" ? "/fedf" : `#${item.toLowerCase()}`}
+                  href={item === "Home" ? "/" : item === "Features" ? "/features" : item === "Showcase" ? "/many-models" : item === "Preview" ? "/fedf" : `#${item.toLowerCase()}`}
                   onClick={(e) => {
                     if (item === "Features" || item === "Showcase" || item === "Preview") {
                       e.preventDefault();
