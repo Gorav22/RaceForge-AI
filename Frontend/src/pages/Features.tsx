@@ -31,7 +31,7 @@ const Features = () => {
               <CardContent className="p-0">
                 <p className="text-muted-foreground mb-6">Jump straight into the game and experience the racing template in action.</p>
                 <div className="flex items-center gap-3">
-                  <Button variant="racing" onClick={() => navigate('/play')}>Play Now</Button>
+                 <a href="http://localhost:5173/"><Button variant="racing">Play Now</Button></a>
                   <Button variant="outline" onClick={() => navigate('/')}>Back Home</Button>
                 </div>
               </CardContent>
