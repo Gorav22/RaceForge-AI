@@ -65,7 +65,13 @@ export const Navigation = () => {
               {navItems.map((item) => (
                 <a
                   key={item}
-                  href={`#${item.toLowerCase()}`}
+                  href={item === "Features" ? "/features" : `#${item.toLowerCase()}`}
+                  onClick={(e) => {
+                    if (item === "Features") {
+                      e.preventDefault();
+                      navigate("/features");
+                    }
+                  }}
                   className="text-muted-foreground hover:text-primary transition-colors font-medium"
                 >
                   {item}
@@ -155,14 +161,21 @@ export const Navigation = () => {
             <div className="md:hidden py-4 backdrop-blur-lg bg-background/95 border-t border-border">
               <div className="flex flex-col gap-4">
                 {navItems.map((item) => (
-                  <a
+                  <button
                     key={item}
-                    href={`#${item.toLowerCase()}`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-muted-foreground hover:text-primary transition-colors font-medium py-2"
+                    onClick={() => {
+                      if (item === "Features") {
+                        navigate("/features");
+                      } else {
+                        // navigate to hash on the index page
+                        window.location.hash = item.toLowerCase();
+                      }
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="text-left text-muted-foreground hover:text-primary transition-colors font-medium py-2 w-full"
                   >
                     {item}
-                  </a>
+                  </button>
                 ))}
                 {!isAuthenticated ? (
                   <>

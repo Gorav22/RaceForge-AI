@@ -45,13 +45,12 @@ export const Hero = () => {
           {/* Content */}
           <div className="text-center lg:text-left space-y-8 animate-fade-in-up">
             <div className="inline-block">
-              <span className="text-accent text-sm font-bold uppercase tracking-wider backdrop-blur-sm bg-accent/10 px-4 py-2 rounded-full border border-accent/20">
-                Professional Racing Design
-              </span>
+             
             </div>
-            
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-racing font-bold leading-none tracking-tight">
-              <span className="text-foreground">PREMIUM F1</span>
+
+            <h1 className="text-[96px] md:text-[100px] lg:text-[126px] font-racing font-bold leading-none tracking-tight">
+              <span className="text-foreground">Race Forge </span>
+              <span className="text-primary">AI</span>
               <br />
               <span className="text-primary italic">GAME DESIGN</span>
               <br />
@@ -59,18 +58,10 @@ export const Hero = () => {
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl">
-              Professional Figma Template for <span className="text-accent font-bold">Next-Gen Racing Games</span>
+             <span className="text-accent font-bold">Next-Gen Racing Games</span>
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button variant="racing" size="lg" className="group">
-                <Zap className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
-                Download Template
-              </Button>
-              <Button variant="outline" size="lg" className="backdrop-blur-sm">
-                View Preview
-              </Button>
-            </div>
+            
             
             {/* Stats */}
             <div className="flex flex-wrap gap-8 justify-center lg:justify-start pt-4">

@@ -46,32 +46,30 @@ export const FinalCTA = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <Button variant="racing" size="lg" className="group text-lg px-8 py-6">
-              <Download className="mr-2 h-6 w-6 group-hover:animate-bounce" />
-              Get Template Now
+             Try Now
             </Button>
           </div>
           
           {/* Features */}
-          <div className="flex flex-wrap justify-center gap-6 pt-8 text-sm text-muted-foreground">
+          <div className="flex flex-wrap justify-center gap-6 pt-8 text-md text-muted-foreground">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-accent" />
-              <span>Instant download</span>
+              <span>Custom car models</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-electric" />
-              <span>Lifetime updates</span>
+              <span>Easy ML learning</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-primary" />
-              <span>Commercial license</span>
+              <span>different race tracks</span>
             </div>
           </div>
           
           {/* Price Badge */}
           <div className="inline-block backdrop-blur-md bg-gradient-red rounded-2xl p-8 animate-glow-pulse">
             <div className="text-2xl text-foreground/80 mb-2">Starting at</div>
-            <div className="text-6xl font-racing font-bold text-foreground mb-2">FREE</div>
-            <div className="text-lg text-foreground/80">Download & Start Building</div>
+            <div className="text-6xl font-racing font-bold text-foreground mb-2">$4.99</div>
           </div>
         </div>
       </div>

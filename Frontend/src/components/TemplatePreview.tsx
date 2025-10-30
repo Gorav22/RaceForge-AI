@@ -18,7 +18,7 @@ export const TemplatePreview = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-5xl md:text-6xl font-racing font-bold mb-4">
-            <span className="text-electric">TEMPLATE</span>{" "}
+            <span className="text-electric">GAME</span>{" "}
             <span className="text-foreground">PREVIEW</span>
           </h2>
           <p className="text-xl text-muted-foreground">

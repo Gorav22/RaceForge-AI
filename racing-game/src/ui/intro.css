@@ -1,0 +1,107 @@
+@keyframes glow {
+  0%, 100% { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.7)); }
+  50% { filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.9)); }
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(0, 255, 255, 0.5); }
+  50% { border-color: rgba(0, 255, 255, 0.9); }
+}
+
+@keyframes neonText {
+  0%, 100% { text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.5); }
+  50% { text-shadow: 0 0 20px rgba(0, 255, 255, 0.9), 0 0 30px rgba(0, 255, 255, 0.7); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.gaming-background {
+  background: linear-gradient(-45deg, #1a1a1a, #000000, #1f1f1f, #000000);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+.neon-border {
+  border: 2px solid rgba(0, 255, 255, 0.5);
+  animation: borderGlow 2s infinite;
+}
+
+.neon-text {
+  color: #fff;
+  animation: neonText 2s infinite;
+}
+
+.gaming-container {
+  position: relative;
+  padding: 3rem;
+  border-radius: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+.gaming-button {
+  background: linear-gradient(45deg, #00a3ff, #0047ff);
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.gaming-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 162, 255, 0.5);
+}
+
+.gaming-button:active {
+  transform: translateY(1px);
+}
+
+.loading-progress {
+  height: 4px;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  background-size: 200% 100%;
+  animation: gradientBG 2s linear infinite;
+}
+
+.grid-background {
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: -1px -1px;
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Keep existing fullscreen and bg classes for compatibility */
+.fullscreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg {
+  background: linear-gradient(to bottom right, #000000, #1a1a1a);
+  position: relative;
+  overflow: hidden;
+}

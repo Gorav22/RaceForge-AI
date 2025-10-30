@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/context/AuthContext";
 import Index from "./pages/Index";
+import Features from "./pages/Features";
 import Dashboard from "./pages/Dashboard";
 import BuyCoins from "./pages/BuyCoins";
 import Transactions from "./pages/Transactions";
@@ -25,6 +26,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/features" element={<Features />} />
             <Route path="/buy-coins" element={<BuyCoins />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/success" element={<PaymentSuccess />} />
