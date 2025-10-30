@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ExternalLink, Download, ArrowLeft, Zap } from "lucide-react" // Added Zap icon
+import { ExternalLink, Download, ArrowLeft, Zap } from "lucide-react"
 import type { FormValues } from "@/lib/form-schema"
 import { submitRodinJob, checkJobStatus, downloadModel } from "@/lib/api-service"
 import ModelViewer from "./model-viewer"
@@ -32,20 +32,143 @@ export default function Rodin() {
     material: "PBR" as const,
   })
 
-  // ... (useEffect, handleOptionsChange, handleStatusCheck, handleSubmit functions remain the same)
+  // Prevent body scroll on mobile
   useEffect(() => {
     if (isMobile) {
       document.body.style.overflow = "hidden"
       document.documentElement.style.overflow = "hidden"
+
       return () => {
         document.body.style.overflow = ""
         document.documentElement.style.overflow = ""
       }
     }
   }, [isMobile])
-  const handleOptionsChange = (newOptions: any) => setOptions(newOptions)
-  async function handleStatusCheck(subscriptionKey: string, taskUuid: string) { /* ... no changes here ... */ }
-  async function handleSubmit(values: FormValues) { /* ... no changes here ... */ }
+
+  const handleOptionsChange = (newOptions: any) => {
+    setOptions(newOptions)
+  }
+
+  async function handleStatusCheck(subscriptionKey: string, taskUuid: string) {
+    try {
+      setIsPolling(true)
+
+      const data = await checkJobStatus(subscriptionKey)
+      console.log("Status response:", data)
+
+      // Check if jobs array exists
+      if (!data.jobs || !Array.isArray(data.jobs) || data.jobs.length === 0) {
+        throw new Error("No jobs found in status response")
+      }
+
+      // Update job statuses
+      setJobStatuses(data.jobs)
+
+      // Check status of all jobs
+      const allJobsDone = data.jobs.every((job: any) => job.status === "Done")
+      const anyJobFailed = data.jobs.some((job: any) => job.status === "Failed")
+
+      if (allJobsDone) {
+        setIsPolling(false)
+
+        // Get the download URL using the task UUID
+        try {
+          const downloadData = await downloadModel(taskUuid)
+          console.log("Download response:", downloadData)
+
+          // Check if there's an error in the download response
+          if (downloadData.error && downloadData.error !== "OK") {
+            throw new Error(`Download error: ${downloadData.error}`)
+          }
+
+          // Find the first GLB file to display in the 3D viewer
+          if (downloadData.list && downloadData.list.length > 0) {
+            const glbFile = downloadData.list.find((file: { name: string }) => file.name.toLowerCase().endsWith(".glb"))
+
+            if (glbFile) {
+              const proxyUrl = `/api/proxy-download?url=${encodeURIComponent(glbFile.url)}`
+              setModelUrl(proxyUrl)
+              setDownloadUrl(glbFile.url)
+              setIsLoading(false)
+              setShowPromptContainer(false)
+            } else {
+              setError("No GLB file found in the results")
+              setIsLoading(false)
+            }
+          } else {
+            setError("No files available for download")
+            setIsLoading(false)
+          }
+        } catch (downloadErr) {
+          setError(`Failed to download model: ${downloadErr instanceof Error ? downloadErr.message : "Unknown error"}`)
+          setIsLoading(false)
+        }
+      } else if (anyJobFailed) {
+        setIsPolling(false)
+        setError("Generation task failed")
+        setIsLoading(false)
+      } else {
+        // Still processing, poll again after a delay
+        setTimeout(() => handleStatusCheck(subscriptionKey, taskUuid), 3000)
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to check status")
+      setIsPolling(false)
+      setIsLoading(false)
+    }
+  }
+
+  async function handleSubmit(values: FormValues) {
+    setIsLoading(true)
+    setError(null)
+    setResult(null)
+    setModelUrl(null)
+    setDownloadUrl(null)
+    setJobStatuses([])
+
+    try {
+      const formData = new FormData()
+
+      if (values.images && values.images.length > 0) {
+        values.images.forEach((image) => {
+          formData.append("images", image)
+        })
+      }
+
+      if (values.prompt) {
+        formData.append("prompt", values.prompt)
+      }
+
+      // Add all the advanced options
+      formData.append("condition_mode", options.condition_mode)
+      formData.append("geometry_file_format", options.geometry_file_format)
+      formData.append("material", options.material)
+      formData.append("quality", options.quality)
+      formData.append("use_hyper", options.use_hyper.toString())
+      formData.append("tier", options.tier)
+      formData.append("TAPose", options.TAPose.toString())
+      formData.append("mesh_mode", "Quad")
+      formData.append("mesh_simplify", "true")
+      formData.append("mesh_smooth", "true")
+
+      // Make the API call through our server route
+      const data = await submitRodinJob(formData)
+      console.log("Generation response:", data)
+
+      setResult(data)
+
+      // Start polling for status
+      if (data.jobs && data.jobs.subscription_key && data.uuid) {
+        handleStatusCheck(data.jobs.subscription_key, data.uuid)
+      } else {
+        setError("Missing required data for status checking")
+        setIsLoading(false)
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unknown error occurred")
+      setIsLoading(false)
+    }
+  }
 
   const handleDownload = () => {
     if (downloadUrl) {
@@ -59,7 +182,7 @@ export default function Rodin() {
 
   const ExternalLinks = () => (
     <div className="flex items-center space-x-6">
-      {/* Links can go here */}
+    
     </div>
   )
 
