@@ -11,6 +11,7 @@ import Transactions from "./pages/Transactions";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
 import NotFound from "./pages/NotFound";
+import ManyModels from "./pages/manymodels";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/success" element={<PaymentSuccess />} />
             <Route path="/cancel" element={<PaymentCancel />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/many-models" element={<ManyModels />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
