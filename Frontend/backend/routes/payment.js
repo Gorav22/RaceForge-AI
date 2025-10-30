@@ -30,13 +30,18 @@ router.post("/create-checkout-session", async (req, res) => {
           price_data: {
             currency: "usd",
             product_data: { name: `${pkg.name} Coin Package` },
-            unit_amount: pkg.price, // in cents
+            unit_amount: pkg.price,
           },
           quantity: 1,
         },
       ],
+      mode: "payment",
       success_url: `${process.env.FRONTEND_URL}/success`,
       cancel_url: `${process.env.FRONTEND_URL}/cancel`,
+      metadata: {
+        userId: req.user?._id || "guest",  // 👈 Include user ID from token if available
+        packageId,
+      },
     });
 
     return res.json({ success: true, data: { url: session.url } });
