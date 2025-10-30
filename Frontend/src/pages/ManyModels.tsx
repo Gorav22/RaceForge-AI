@@ -7,6 +7,8 @@ import { CarModellll} from "@/components/CarModel4";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Suspense, ReactNode } from "react";
+import { Navigation } from "@/components/Navigation";
+
 
 // PlusIcon Component
 const PlusIcon = () => (
@@ -40,7 +42,7 @@ const CarCard = ({ model, description, image, modelComponent}: CarCardProps) => 
 
   return (
     <div
-      className="bg-gray-800 rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02]"
+      className="black rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02]"
       style={{
         border: isHovered ? "2px solid #ef4444" : "2px solid transparent",
         boxShadow: isHovered ? "0 0 30px rgba(239, 68, 68, 0.3)" : "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
@@ -136,11 +138,13 @@ const ManyModels = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    // <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-background text-foreground">
+      <Navigation />
       {/* Header */}
       <header className="py-16 text-center border-b border-gray-800">
-        <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-6xl font-bold text-white mb-4 tracking-tight">
+        <div className="max-w-6xl mx-auto px-5">
+          <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
             Future-Gen <span className="text-red-500">Automotive</span>
           </h1>
           <p className="text-gray-400 text-lg">Where Innovation Meets Performance</p>
@@ -165,7 +169,7 @@ const ManyModels = () => {
 
         {/* Custom Creator CTA */}
         <section className="text-center">
-          <div className="bg-gray-800 rounded-lg p-12 border-2 border-gray-700 hover:border-red-500 transition-all duration-300 hover:scale-105 cursor-pointer hover:shadow-2xl hover:shadow-red-500/30">
+          <div className="bg-[hsl(0,67%,2%)] rounded-lg p-12 border-2 border-gray-700 hover:border-red-500 transition-all duration-300 hover:scale-105 cursor-pointer hover:shadow-2xl hover:shadow-red-500/30">
             <div className="flex justify-center mb-6">
               <PlusIcon />
             </div>
@@ -187,11 +191,11 @@ const ManyModels = () => {
 
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 py-8 mt-20">
+      {/* <footer className="border-t border-gray-800 py-8 mt-20">
         <div className="max-w-6xl mx-auto px-4 text-center text-gray-500">
           <p>© 2025 Future-Gen Automotive. Redefining the Road Ahead.</p>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };
