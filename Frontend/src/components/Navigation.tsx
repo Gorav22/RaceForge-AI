@@ -37,7 +37,7 @@ export const Navigation = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const navItems = ["Features", "Showcase", "Preview", "Pricing"];
+  const navItems = ["Home", "Features", "Showcase", "Preview", "Pricing"];
 
   return (
     <>
