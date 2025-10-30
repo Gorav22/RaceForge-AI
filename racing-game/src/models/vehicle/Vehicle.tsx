@@ -112,8 +112,8 @@ export function Vehicle({ angularVelocity, children, position, rotation }: Vehic
     chassisBody.current!.children[0].rotation.z = (Math.cos(state.clock.getElapsedTime() * 20) * (speed / maxSpeed)) / 100
   })
 
-  const ToggledAccelerateAudio = useToggle(AccelerateAudio, ['ready', 'sound'])
-  const ToggledEngineAudio = useToggle(EngineAudio, ['ready', 'sound'])
+  const ToggledAccelerateAudio = useToggle(AccelerateAudio, ['sound', 'sound'])
+  const ToggledEngineAudio = useToggle(EngineAudio, ['sound', 'sound'])
 
   return (
     <group>

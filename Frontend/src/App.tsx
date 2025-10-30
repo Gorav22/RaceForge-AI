@@ -14,6 +14,7 @@ import PaymentCancel from "./pages/PaymentCancel";
 import NotFound from "./pages/NotFound";
 import ManyModels from "./pages/manymodels";
 import ObjViewer from "./pages/fedf";
+import Generate3DModel from "./pages/generatemodel";
 
 
 const queryClient = new QueryClient();
@@ -35,8 +36,8 @@ const App = () => (
             <Route path="/cancel" element={<PaymentCancel />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/many-models" element={<ManyModels />} />
-                      <Route path="/fedf" element={<ObjViewer />} />
-
+            <Route path="/fedf" element={<ObjViewer />} />
+            <Route path="/generate-model" element={<Generate3DModel />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

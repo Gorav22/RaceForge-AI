@@ -45,7 +45,6 @@ export const Finished = (): JSX.Element => {
         <Scores className="leaderboard" scores={scores} />
       </div>
       <div className="finished-auth">
-        {isAuthenticated ? (
           <>
             {scoreId ? (
               position ? (
@@ -60,9 +59,6 @@ export const Finished = (): JSX.Element => {
               </>
             )}
           </>
-        ) : (
-          <Auth />
-        )}
       </div>
       <div className="finished-restart">
         <button className="restart-btn" onClick={reset}>
