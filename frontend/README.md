@@ -60,6 +60,41 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Auth backend (Node.js) - How to run
+
+1. Install frontend deps (once):
+
+```sh
+npm i
+```
+
+2. Install and run the auth server:
+
+```sh
+cd server
+npm i
+npm run dev
+```
+
+This starts the server at `http://localhost:3001` with a SQLite DB file `auth.sqlite` in the `server` folder.
+
+3. In a separate terminal, run the frontend from the project root:
+
+```sh
+npm run dev
+```
+
+The Vite dev server (port 8080) proxies API calls from `/api/*` to the auth server.
+
+### Auth endpoints
+
+- POST `/api/auth/signup` `{ email, password, name? }`
+- POST `/api/auth/login` `{ email, password }`
+- GET `/api/auth/me`
+- POST `/api/auth/logout`
+
+Auth uses httpOnly cookies with JWT. For production set `JWT_SECRET` and `CLIENT_ORIGIN` env vars in the server process and enable `secure` cookies.
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/cca692a3-300d-4c58-82e5-f9064fdb0416) and click on Share -> Publish.

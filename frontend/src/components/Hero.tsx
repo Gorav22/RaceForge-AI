@@ -3,10 +3,22 @@ import { Zap, Gauge, Trophy } from "lucide-react";
 import heroCar from "@/assets/f1-hero-car.jpg";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CarModel } from "@/components/CarModel";
 
 export const Hero = () => {
+  const navigate = useNavigate();
+  const [isAuthed, setIsAuthed] = useState<boolean>(false);
+  useEffect(() => {
+    fetch("/api/auth/me", { credentials: "include" })
+      .then((r) => setIsAuthed(r.ok))
+      .catch(() => setIsAuthed(false));
+  }, []);
+
+  const onGetStarted = () => navigate("/signup");
+  const onBuyCoins = () => navigate(isAuthed ? "/buy-coins" : "/login");
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-racing bg-carbon-fiber">
       {/* Animated Background Elements */}
@@ -63,14 +75,17 @@ export const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button variant="racing" size="lg" className="group">
+              <Button variant="racing" size="lg" className="group" onClick={onGetStarted}>
                 <Zap className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
-                Download Template
+                Get Started Free
               </Button>
-              <Button variant="outline" size="lg" className="backdrop-blur-sm">
-                View Preview
+              <Button variant="outline" size="lg" className="backdrop-blur-sm" onClick={onBuyCoins}>
+                Buy Coins Now →
               </Button>
             </div>
+            <p className="text-sm text-muted-foreground">
+              Already have an account? <button className="underline" onClick={() => navigate("/login")}>Login</button>
+            </p>
             
             {/* Stats */}
             <div className="flex flex-wrap gap-8 justify-center lg:justify-start pt-4">
