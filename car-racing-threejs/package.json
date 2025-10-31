@@ -1,0 +1,41 @@
+{
+  "name": "car-racing-three",
+  "version": "1.0.0",
+  "description": "Using cannon.js and three.js to make car racing game",
+  "keywords": [
+    "physics",
+    "cannon-es",
+    "vehicle",
+    "use-cannon"
+  ],
+  "author": "pankaj2k9",
+  "license": "ISC",
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/cannon": "^6.6.0",
+    "@react-three/drei": "^9.92.7",
+    "@react-three/fiber": "^8.15.12",
+    "@react-three/postprocessing": "^2.15.11",
+    "@types/three": "^0.160.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "three": "^0.160.0",
+    "zustand": "^4.4.7"
+  },
+  "scripts": {
+    "start": "r3f-pack start",
+    "build": "r3f-pack build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "r3f-pack": "^2.6.2"
+  }
+}
