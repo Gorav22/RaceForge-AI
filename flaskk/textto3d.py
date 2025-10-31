@@ -1,6 +1,8 @@
 import os
 import torch
 import shutil
+import numpy as np
+import trimesh
 from shap_e.diffusion.sample import sample_latents
 from shap_e.diffusion.gaussian_diffusion import diffusion_from_config
 from shap_e.models.download import load_model, load_config
@@ -47,9 +49,49 @@ def generate_3d_from_text(prompt, batch_size=1):
     )
 
     os.makedirs("outputs", exist_ok=True)
+
     for i, latent in enumerate(latents):
-        mesh = decode_latent_mesh(xm, latent).tri_mesh()
-        output_path = f"outputs/text_{prompt.replace(' ', '_')}_{i}.obj"
-        with open(output_path, 'w') as f:
+        decoded_mesh = decode_latent_mesh(xm, latent)
+        mesh = decoded_mesh.tri_mesh()
+        
+        vertex_channels = decoded_mesh.vertex_channels
+
+        base_name = f"text_f1car_{i}"
+
+        verts = mesh.verts.cpu().numpy() if torch.is_tensor(mesh.verts) else mesh.verts
+        faces = mesh.faces.cpu().numpy() if torch.is_tensor(mesh.faces) else mesh.faces
+        
+        if vertex_channels is not None and 'R' in vertex_channels:
+            r = vertex_channels['R'].cpu().numpy()
+            g = vertex_channels['G'].cpu().numpy()
+            b = vertex_channels['B'].cpu().numpy()
+            
+            vertex_colors = np.stack([r, g, b], axis=1)
+            vertex_colors = (np.clip(vertex_colors, 0, 1) * 255).astype(np.uint8)
+            
+            print(f"[INFO] Extracted vertex colors: {vertex_colors.shape}")
+        else:
+            vertex_colors = np.ones((len(verts), 3), dtype=np.uint8) * 128
+            print(f"[WARNING] No vertex colors found, using default gray")
+        
+        colored_mesh = trimesh.Trimesh(
+            vertices=verts,
+            faces=faces,
+            vertex_colors=vertex_colors,
+            process=False
+        )
+
+        glb_path = f"outputs/{base_name}.glb"
+        colored_mesh.export(glb_path, file_type='glb')
+        print(f"[✅] GLB (colored) saved at {glb_path}")
+
+        obj_path = f"outputs/{base_name}.obj"
+        with open(obj_path, 'w') as f:
             mesh.write_obj(f)
-        print(f"[SUCCESS] 3D model saved at {output_path}")
+        print(f"[ℹ️] OBJ (geometry only) saved at {obj_path}")
+
+    print(f"\n🎨 All models saved in: {os.path.abspath('outputs')}")
+    print(f"[INFO] Total vertices: {len(verts)}, Total faces: {len(faces)}")
+
+if __name__ == "__main__":
+    generate_3d_from_text("a futuristic racing car", batch_size=1)
