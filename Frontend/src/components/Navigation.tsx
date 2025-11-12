@@ -65,19 +65,25 @@ export const Navigation = () => {
               {navItems.map((item) => (
                 <a
                   key={item}
-                  href={item === "Features" ? "/features" : item === "Showcase" ? "/many-models" : item === "Preview" ? "/fedf" : item === "Pricing" ? "/buy-coins" : `#${item.toLowerCase()}`}
+                  href={
+                    item === "Home"
+                      ? "/"
+                      : item === "Features"
+                      ? "/features"
+                      : item === "Showcase"
+                      ? "/many-models"
+                      : item === "Preview"
+                      ? "http://localhost:3001/"
+                      : `#${item.toLowerCase()}`
+                  }
                   onClick={(e) => {
-                    if (["Features", "Showcase", "Preview", "Pricing"].includes(item)) {
+                    if (item === "Features" || item === "Showcase" || item === "Preview") {
                       e.preventDefault();
-                      navigate(
-                        item === "Features"
-                          ? "/features"
-                          : item === "Showcase"
-                          ? "/many-models"
-                          : item === "Preview"
-                          ? "/fedf"
-                          : "/buy-coins"
-                      );
+                      if (item === "Preview") {
+                        window.open("http://localhost:3001/", "_blank"); // 👈 opens Preview in new tab
+                      } else {
+                        navigate(item === "Features" ? "/features" : "/many-models");
+                      }
                     }
                   }}
                   className="text-muted-foreground hover:text-primary transition-colors font-medium"
@@ -177,11 +183,8 @@ export const Navigation = () => {
                       } else if (item === "Showcase") {
                         navigate("/many-models");
                       } else if (item === "Preview") {
-                        navigate("/fedf");
-                      }else if (item === "Pricing") {
-                        navigate("/buy-coins");
+                        window.open("http://localhost:3001/", "_blank"); // 👈 opens Preview in new tab
                       } else {
-                        // navigate to hash on the index page
                         window.location.hash = item.toLowerCase();
                       }
                       setIsMobileMenuOpen(false);
