@@ -10,6 +10,7 @@ export const BoostAudio = () => {
   const ref = useRef<PositionalAudioImpl>(null)
   const [boost, maxSpeed, sound] = useStore(({ controls: { boost }, vehicleConfig: { maxSpeed }, sound }) => [boost, maxSpeed, sound])
 
+  
   useFrame(() => {
     const rate = Math.pow(mutation.speed / maxSpeed, 1.5) + 0.5
     ref.current?.setVolume(rate * 1.5)
